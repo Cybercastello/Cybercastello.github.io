@@ -23,12 +23,16 @@ a {
   background: rgb(235, 235, 235);
 }
 
+body {
+ background-image: url("/assets/images/lub.jpg");
+ background-color: #cccccc;
+}
+
 /* end dark mode */
 /* main section */
 #main {
   width: 100%;
   height: 100vh;
-  background-color: #292a2d;
 }
 #main .main__container {
   margin: 0 auto;
