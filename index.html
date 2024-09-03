@@ -10,187 +10,189 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>I'm c4s73llo🦋</title>
     <style>
-        /* Additional styles for dark mode and terminal-like input */
-        body.light {
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        
-        .main__container.light {
-            background-color: #ffffff;
-        }
+        /* Internal styles for additional features */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
-        .header.light {
-            background-color: #e0e0e0;
-        }
-
-        .logotext.light {
-            color: #333;
-        }
-
-        #tabs .body .terminal {
+        body {
             background-color: #292a2d;
-            color: #00ff00;
+            color: #a9a9b3;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .name h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
             font-family: "VT323", monospace;
-            border: 1px solid #444;
+        }
+
+        .button {
+            background: chartreuse;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #a0e582;
+        }
+
+        /* Terminal Styles */
+        #terminal {
+            display: none; /* Hidden by default */
+            background-color: #1e1e1e;
+            color: #00ff00;
+            width: 90%;
+            max-width: 800px;
+            height: 300px;
             border-radius: 10px;
             padding: 20px;
-            width: 100%;
-            height: 200px;
+            font-family: "VT323", monospace;
             overflow-y: auto;
-            margin-bottom: 20px;
+            margin-top: 30px;
         }
 
         .terminal-input {
             width: 100%;
-            border: none;
             background-color: transparent;
-            color: #00ff00;
-            font-family: "VT323", monospace;
-            font-size: 18px;
+            border: none;
             outline: none;
+            color: #00ff00;
+            font-size: 18px;
         }
 
         .social {
-            margin-top: 30px;
+            margin-top: 50px;
+            display: flex;
+            gap: 15px;
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+        .social i.btn img {
+            width: 32px;
+            height: 32px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes typing {
+            0% { width: 0; }
+            100% { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <section id="main">
-        <section class="main__container">
-            <div class="header">
-                <nav>
-                    <span class="arrow"><i class="fa fa-terminal"></i></span>
-                    <span class="logotext">root@castello:~#</span>
-                    <span class="dark">
-                        <img src="/assets/Images/settings_brightness_black_24dp (1).svg" alt="Toggle Dark Mode" />
-                    </span>
-                </nav>
-            </div>
-            <section id="tabs">
-                <div class="body">
-                    <div class="logo_img">
-                        <img class="cofe" src="/assets/Images/Baby.webp" alt="Profile Image" />
-                    </div>
-                    <div class="name">
-                        <h1><span class="c">c</span>4s73Llo</h1>
-                    </div>
-                    <div class="para">
-                        <p>Pentester || CTF Player</p>
-                    </div>
-                    <a href="#" class="button about-button">>></a>
-                </div>
-                <!-- Terminal Area -->
-                <div class="body terminal">
-                    <p>Welcome to c4s73llo's terminal. Type commands like "skills", "achievement", "whoami", or "ls".</p>
-                    <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command..." />
-                </div>
-                <!-- About Section -->
-                <div class="body about fade-in" style="display: none;">
-                    <h2>WHO AM I</h2>
-                    <p>
-                        Amal Aka c4s73Llo, Cyber Security Enthusiast, Bug Hunter, CTF Player, Pentesting... as a hobby to improve skills; Love to hunt bugs from vulnerable points😋 ..Self learner & Music lover👽
-                    </p>
-                    <div class="achiev">
-                        <a href="/hof.html">Achievements</a>
-                    </div>
-                    <script src="https://tryhackme.com/badge/847331"></script>
-                    <a href="#" class="button remove"><<</a>
-                </div>
-            </section>
-        </section>
-        <!-- Social Media Links at the Bottom -->
-        <div class="social">
-            <a href="https://www.instagram.com/castello.777/?r=nametag">
-                <i class="btn"><img src="/assets/Images/instagram (1).svg" alt="Instagram" /></i>
-            </a>
-            <a href="https://github.com/Cybercastello">
-                <i class="btn"><img src="/assets/Images/Github.svg" alt="GitHub" /></i>
-            </a>
-            <a href="https://twitter.com/CCastello318">
-                <i class="btn"><img src="/assets/Images/twitter.svg" alt="Twitter" /></i>
-            </a>
-            <a href="https://tryhackme.com/p/Amal.s.Babu">
-                <i class="btn"><img src="/assets/Images/tryhackme.svg" alt="TryHackMe" /></i>
-            </a>
-            <a href="https://www.linkedin.com/in/amal-s-babu-98385b252">
-                <i class="btn"><img src="/assets/Images/linkedin.svg" alt="LinkedIn" /></i>
-            </a>
+    <!-- Initial Screen with Name and Button -->
+    <div class="container">
+        <div class="name">
+            <h1>c4s73Llo</h1>
         </div>
-    </section>
+        <button class="button" id="terminalButton">Open Terminal</button>
+    </div>
+
+    <!-- Terminal Section -->
+    <div id="terminal">
+        <div id="terminalOutput"></div>
+        <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command..." autofocus />
+    </div>
+
+    <!-- Social Media Links at the Bottom -->
+    <div class="social">
+        <a href="https://www.instagram.com/castello.777/?r=nametag">
+            <i class="btn"><img src="/assets/Images/instagram (1).svg" alt="Instagram" /></i>
+        </a>
+        <a href="https://github.com/Cybercastello">
+            <i class="btn"><img src="/assets/Images/Github.svg" alt="GitHub" /></i>
+        </a>
+        <a href="https://twitter.com/CCastello318">
+            <i class="btn"><img src="/assets/Images/twitter.svg" alt="Twitter" /></i>
+        </a>
+        <a href="https://tryhackme.com/p/Amal.s.Babu">
+            <i class="btn"><img src="/assets/Images/tryhackme.svg" alt="TryHackMe" /></i>
+        </a>
+        <a href="https://www.linkedin.com/in/amal-s-babu-98385b252">
+            <i class="btn"><img src="/assets/Images/linkedin.svg" alt="LinkedIn" /></i>
+        </a>
+    </div>
+
     <script>
-        const aboutBtn = document.querySelectorAll(".about-button");
-        const remBtn = document.querySelector(".remove");
-        const dark = document.querySelector(".dark img");
-        const main = document.querySelector("#main");
-        const header = document.querySelector(".header");
-        const logotext = document.querySelector(".logotext");
-        const about = document.querySelector(".about");
-        const body = document.querySelectorAll(".body");
-        const terminalInput = document.getElementById('terminalInput');
+        const terminalButton = document.getElementById("terminalButton");
+        const terminal = document.getElementById("terminal");
+        const terminalInput = document.getElementById("terminalInput");
+        const terminalOutput = document.getElementById("terminalOutput");
 
-        // Toggle Dark Mode
-        dark.addEventListener("click", () => {
-            document.body.classList.toggle("light");
-            main.classList.toggle("light");
-            header.classList.toggle("light");
-            logotext.classList.toggle("light");
+        // Show Terminal on Button Click
+        terminalButton.addEventListener("click", () => {
+            terminalButton.style.display = "none"; // Hide button
+            terminal.style.display = "block"; // Show terminal
+            terminalInput.focus(); // Focus on input
+            showTerminalMessage("Welcome to c4s73llo's terminal! Type 'ls' to list available commands.");
         });
 
-        // Show/Hide About Section
-        aboutBtn.forEach((btn) => {
-            btn.addEventListener("click", (event) => {
-                event.preventDefault(); // Prevent link default behavior
-                about.classList.toggle("fade-in");
-                about.style.display = about.style.display === "none" || about.style.display === "" ? "block" : "none";
-                body[0].style.display = body[0].style.display === "none" ? "flex" : "none";
-            });
-        });
-
-        // Hide About Section when Remove button is clicked
-        remBtn.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevent link default behavior
-            about.style.display = "none";
-            body[0].style.display = "flex";
-        });
-
-        // Terminal Input Handler
-        terminalInput.addEventListener('keypress', function (e) {
+        // Handle Terminal Commands
+        terminalInput.addEventListener("keypress", function (e) {
             if (e.key === 'Enter') {
-                const command = terminalInput.value.toLowerCase();
-                terminalInput.value = ''; // Clear input after Enter is pressed
+                const command = terminalInput.value.toLowerCase().trim();
+                terminalInput.value = ''; // Clear input
                 handleCommand(command);
             }
         });
 
+        // Typing Animation for Terminal Output
+        function showTerminalMessage(message) {
+            const messageElement = document.createElement("div");
+            messageElement.textContent = '';
+            terminalOutput.appendChild(messageElement);
+
+            let i = 0;
+            const typingEffect = setInterval(() => {
+                if (i < message.length) {
+                    messageElement.textContent += message.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingEffect);
+                }
+            }, 50);
+        }
+
+        // Command Handler
         function handleCommand(command) {
-            switch(command) {
+            switch (command) {
                 case 'whoami':
-                    about.style.display = 'block';
-                    about.classList.add("fade-in");
-                    body[0].style.display = 'none';
-                    break;
-                case 'ls':
-                    alert('Displaying available sections... (In actual implementation, it would list available commands)');
+                    showTerminalMessage("Amal Aka c4s73Llo, Cyber Security Enthusiast, Bug Hunter, CTF Player...");
                     break;
                 case 'skills':
-                    alert('Skills: Penetration Testing, CTFs, Ethical Hacking, etc.');
+                    showTerminalMessage("Skills: Penetration Testing, CTFs, Ethical Hacking, etc.");
                     break;
-                case 'achievement':
-                    window.location.href = '/hof.html'; // Redirect to achievements page
+                case 'achievements':
+                    showTerminalMessage("Redirecting to Achievements page...");
+                    setTimeout(() => { window.location.href = '/hof.html'; }, 1000);
+                    break;
+                case 'ls':
+                    showTerminalMessage("Available Commands: whoami, skills, achievements, ls, pwd");
+                    break;
+                case 'pwd':
+                    showTerminalMessage("/home/c4s73llo");
                     break;
                 default:
-                    alert('Command not found!');
+                    showTerminalMessage("Command not found!");
             }
         }
     </script>
