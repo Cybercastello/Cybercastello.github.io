@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>I'm c4s73llo🦋</title>
     <style>
-        /* Internal styles for additional features */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
         @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
@@ -25,6 +24,22 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            position: relative; /* Ensure positioning for pseudo-element */
+        }
+
+        /* Pseudo-element for background image */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://img.freepik.com/free-photo/fantasy-anime-style-scene_23-2151135000.jpg?size=626&ext=jpg&ga=GA1.1.1096992058.1725355131&semt=ais_hybrid') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px); /* Adjust blur intensity as needed */
+            z-index: -1; /* Ensure the image is behind other content */
+            opacity: 0.5; /* Optional: adjust opacity for desired effect */
         }
 
         .container {
@@ -57,50 +72,6 @@
             background: #a0e582;
         }
 
-        /* Terminal Styles */
-        #terminal {
-            display: none; /* Hidden by default */
-            background-color: #1e1e1e;
-            color: #00ff00;
-            width: 90%;
-            max-width: 800px;
-            height: 400px;
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            padding: 20px;
-            font-family: "VT323", monospace;
-            overflow-y: auto;
-            margin-top: 30px;
-            position: relative;
-        }
-
-        .terminal-label {
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            background-color: #1e1e1e;
-            padding: 0 10px;
-            color: #00ff00;
-            font-family: "VT323", monospace;
-            font-size: 16px;
-        }
-
-        #terminalOutput {
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .terminal-input {
-            width: 100%;
-            background-color: transparent;
-            border: none;
-            outline: none;
-            color: #00ff00;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
         .social {
             margin-top: 50px;
             display: flex;
@@ -112,9 +83,86 @@
             height: 32px;
         }
 
+        .terminal {
+            background: #000;
+            color: #0f0;
+            font-family: "VT323", monospace;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            height: 60%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .terminal-header span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #f00;
+        }
+
+        .terminal-header span.yellow {
+            background: #ff0;
+        }
+
+        .terminal-header span.green {
+            background: #0f0;
+        }
+
+        .terminal-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            margin-top: 20px; /* Adjusted for label positioning */
+        }
+
+        .terminal-input {
+            background: #111;
+            padding: 10px;
+            border-top: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-input label {
+            margin-right: 5px;
+        }
+
+        .terminal-input input {
+            background: #111;
+            color: #0f0;
+            border: none;
+            width: 100%;
+            outline: none;
+        }
+
+        .typing {
+            border-right: 2px solid #0f0;
+            animation: typing 1s steps(30, end) infinite;
+        }
+
         @keyframes typing {
-            0% { width: 0; }
-            100% { width: 100%; }
+            from { width: 0; }
+            to { width: 100%; }
         }
     </style>
 </head>
@@ -125,13 +173,6 @@
             <h1>c4s73Llo</h1>
         </div>
         <button class="button" id="terminalButton">Open Terminal</button>
-    </div>
-
-    <!-- Terminal Section -->
-    <div id="terminal">
-        <label class="terminal-label">Terminal</label>
-        <div id="terminalOutput"></div>
-        <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command..." autofocus />
     </div>
 
     <!-- Social Media Links at the Bottom -->
@@ -155,65 +196,102 @@
 
     <script>
         const terminalButton = document.getElementById("terminalButton");
-        const terminal = document.getElementById("terminal");
-        const terminalInput = document.getElementById("terminalInput");
-        const terminalOutput = document.getElementById("terminalOutput");
 
         // Show Terminal on Button Click
         terminalButton.addEventListener("click", () => {
             terminalButton.style.display = "none"; // Hide button
-            terminal.style.display = "block"; // Show terminal
-            terminalInput.focus(); // Focus on input
-            showTerminalMessage("Welcome to c4s73llo's terminal! Type 'ls' to list available commands.");
+            renderSecondTerminal(); // Render the second terminal
         });
 
-        // Handle Terminal Commands
-        terminalInput.addEventListener("keypress", function (e) {
-            if (e.key === 'Enter') {
-                const command = terminalInput.value.toLowerCase().trim();
-                terminalInput.value = ''; // Clear input
-                handleCommand(command);
-            }
-        });
+        // Function to Render the Second Terminal
+        function renderSecondTerminal() {
+            const body = document.body;
 
-        // Typing Animation for Terminal Output
-        function showTerminalMessage(message) {
-            const messageElement = document.createElement("div");
-            messageElement.textContent = '';
-            terminalOutput.appendChild(messageElement);
+            const terminalHtml = `
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="red"></span>
+                        <span class="yellow"></span>
+                        <span class="green"></span>
+                    </div>
+                    <div class="terminal-body" id="terminal-body">
+                        <pre id="terminal-output">Welcome to the Interactive Terminal! Type 'help' to see available commands.</pre>
+                    </div>
+                    <div class="terminal-input">
+                        <label for="terminal-input">user@localhost:~$</label>
+                        <input type="text" id="terminal-input" class="typing" autofocus autocomplete="off">
+                    </div>
+                </div>
+            `;
+            body.innerHTML += terminalHtml; // Append terminal HTML
 
-            let i = 0;
-            const typingEffect = setInterval(() => {
-                if (i < message.length) {
-                    messageElement.textContent += message.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typingEffect);
-                }
-            }, 50);
+            // Initialize terminal functionality
+            initializeTerminal();
         }
 
-        // Command Handler
-        function handleCommand(command) {
-            switch (command) {
-                case 'whoami':
-                    showTerminalMessage("Amal Aka c4s73Llo, Cyber Security Enthusiast, Bug Hunter, CTF Player...");
-                    break;
-                case 'skills':
-                    showTerminalMessage("Skills: Penetration Testing, CTFs, Ethical Hacking, etc.");
-                    break;
-                case 'achievements':
-                    showTerminalMessage("Redirecting to Achievements page...");
-                    setTimeout(() => { window.location.href = '/hof.html'; }, 1000);
-                    break;
-                case 'ls':
-                    showTerminalMessage("Available Commands: whoami, skills, achievements, ls, pwd");
-                    break;
-                case 'pwd':
-                    showTerminalMessage("/home/c4s73llo");
-                    break;
-                default:
-                    showTerminalMessage("Command not found!");
+        // Initialize Terminal Logic
+        function initializeTerminal() {
+            const terminalInput = document.getElementById('terminal-input');
+            const terminalOutput = document.getElementById('terminal-output');
+            const terminalBody = document.getElementById('terminal-body');
+
+            const commands = {
+                help: function() {
+                    return `Available commands:
+  - help: Show available commands
+  - cd: Change directory (simulated)
+  - pwd: Print current directory
+  - whoami: Show user information
+  - achievements: Show achievements`;
+                },
+                cd: function(args) {
+                    if (args.length === 0) return "Specify a directory to change to.";
+                    return `Changed directory to ${args[0]} (simulated).`;
+                },
+                pwd: function() {
+                    return "/home/user (simulated)";
+                },
+                whoami: function() {
+                    return "Amal aka c4s73Llo, Cyber Security Enthusiast, Bug Hunter, CTF Player, Pentesting... Self learner & Music lover.";
+                },
+                achievements: function() {
+                    return "Achievements: \n- Completed over 100 CTFs\n- Top 1% on TryHackMe\n- Found multiple vulnerabilities in real-world applications.";
+                }
+            };
+
+            terminalInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    const input = terminalInput.value.trim();
+                    if (input) {
+                        handleCommand(input);
+                        terminalInput.value = ''; // Clear input
+                    }
+                    event.preventDefault();
+                }
+            });
+
+            function handleCommand(input) {
+                const [command, ...args] = input.split(' ');
+                addCommandToTerminal(input);
+                if (commands[command]) {
+                    const response = commands[command](args);
+                    addResponseToTerminal(response);
+                } else {
+                    addResponseToTerminal(`Command not found: ${command}`);
+                }
+            }
+
+            function addCommandToTerminal(command) {
+                const outputLine = document.createElement('pre');
+                outputLine.textContent = `user@localhost:~$ ${command}`;
+                terminalOutput.appendChild(outputLine);
+            }
+
+            function addResponseToTerminal(response) {
+                const responseLine = document.createElement('pre');
+                responseLine.textContent = response;
+                terminalOutput.appendChild(responseLine);
+                terminalBody.scrollTop = terminalBody.scrollHeight; // Auto-scroll to bottom
             }
         }
     </script>
