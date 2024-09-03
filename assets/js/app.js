@@ -1,26 +1,32 @@
-const aboutbtn = document.querySelectorAll(".button");
-const rembtn = document.querySelector(".remove");
-const link = document.querySelectorAll("a");
-const about = document.querySelector(".about");
-const body = document.querySelector(".body");
+const aboutBtn = document.querySelectorAll(".about-button");
+const remBtn = document.querySelector(".remove");
 const dark = document.querySelector(".dark");
 const main = document.querySelector("#main");
 const header = document.querySelector(".header");
 const logotext = document.querySelector(".logotext");
+const about = document.querySelector(".about");
+const body = document.querySelectorAll(".body");
 
+// Toggle Dark Mode
 dark.addEventListener("click", () => {
-  main.classList.toggle("light");
-  header.classList.toggle("light");
-});
-aboutbtn.forEach((btns) => {
-  btns.addEventListener("click", () => {
-    body.classList.toggle("close");
-    about.classList.toggle("open");
-    logotext.classList.toggle("open");
-    about.classList.remove("close");
-  });
+    main.classList.toggle("light");
+    header.classList.toggle("light");
+    logotext.classList.toggle("light");
 });
 
-rembtn.addEventListener("click", () => {
-  about.classList.add("close");
+// Show/Hide About Section
+aboutBtn.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent link default behavior
+        about.style.display = about.style.display === "none" || about.style.display === "" ? "block" : "none";
+        body[0].style.display = body[0].style.display === "none" ? "flex" : "none";
+    });
 });
+
+// Hide About Section when Remove button is clicked
+remBtn.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent link default behavior
+    about.style.display = "none";
+    body[0].style.display = "flex";
+});
+
