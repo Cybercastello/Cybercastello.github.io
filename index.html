@@ -9,6 +9,61 @@
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>I'm c4s73llo🦋</title>
+    <style>
+        /* Additional styles for dark mode and terminal-like input */
+        body.light {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .main__container.light {
+            background-color: #ffffff;
+        }
+
+        .header.light {
+            background-color: #e0e0e0;
+        }
+
+        .logotext.light {
+            color: #333;
+        }
+
+        #tabs .body .terminal {
+            background-color: #292a2d;
+            color: #00ff00;
+            font-family: "VT323", monospace;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .terminal-input {
+            width: 100%;
+            border: none;
+            background-color: transparent;
+            color: #00ff00;
+            font-family: "VT323", monospace;
+            font-size: 18px;
+            outline: none;
+        }
+
+        .social {
+            margin-top: 30px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
     <section id="main">
@@ -35,24 +90,13 @@
                     </div>
                     <a href="#" class="button about-button">>></a>
                 </div>
-                <div class="social">
-                    <a href="https://www.instagram.com/castello.777/?r=nametag">
-                        <i class="btn"><img src="/assets/Images/instagram (1).svg" alt="Instagram" /></i>
-                    </a>
-                    <a href="https://github.com/Cybercastello">
-                        <i class="btn"><img src="/assets/Images/Github.svg" alt="GitHub" /></i>
-                    </a>
-                    <a href="https://twitter.com/CCastello318">
-                        <i class="btn"><img src="/assets/Images/twitter.svg" alt="Twitter" /></i>
-                    </a>
-                    <a href="https://tryhackme.com/p/Amal.s.Babu">
-                        <i class="btn"><img src="/assets/Images/tryhackme.svg" alt="TryHackMe" /></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/amal-s-babu-98385b252">
-                        <i class="btn"><img src="/assets/Images/linkedin.svg" alt="LinkedIn" /></i>
-                    </a>
+                <!-- Terminal Area -->
+                <div class="body terminal">
+                    <p>Welcome to c4s73llo's terminal. Type commands like "skills", "achievement", "whoami", or "ls".</p>
+                    <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command..." />
                 </div>
-                <div class="body about" style="display: none;">
+                <!-- About Section -->
+                <div class="body about fade-in" style="display: none;">
                     <h2>WHO AM I</h2>
                     <p>
                         Amal Aka c4s73Llo, Cyber Security Enthusiast, Bug Hunter, CTF Player, Pentesting... as a hobby to improve skills; Love to hunt bugs from vulnerable points😋 ..Self learner & Music lover👽
@@ -65,7 +109,90 @@
                 </div>
             </section>
         </section>
+        <!-- Social Media Links at the Bottom -->
+        <div class="social">
+            <a href="https://www.instagram.com/castello.777/?r=nametag">
+                <i class="btn"><img src="/assets/Images/instagram (1).svg" alt="Instagram" /></i>
+            </a>
+            <a href="https://github.com/Cybercastello">
+                <i class="btn"><img src="/assets/Images/Github.svg" alt="GitHub" /></i>
+            </a>
+            <a href="https://twitter.com/CCastello318">
+                <i class="btn"><img src="/assets/Images/twitter.svg" alt="Twitter" /></i>
+            </a>
+            <a href="https://tryhackme.com/p/Amal.s.Babu">
+                <i class="btn"><img src="/assets/Images/tryhackme.svg" alt="TryHackMe" /></i>
+            </a>
+            <a href="https://www.linkedin.com/in/amal-s-babu-98385b252">
+                <i class="btn"><img src="/assets/Images/linkedin.svg" alt="LinkedIn" /></i>
+            </a>
+        </div>
     </section>
-    <script src="/assets/js/app.js"></script>
+    <script>
+        const aboutBtn = document.querySelectorAll(".about-button");
+        const remBtn = document.querySelector(".remove");
+        const dark = document.querySelector(".dark img");
+        const main = document.querySelector("#main");
+        const header = document.querySelector(".header");
+        const logotext = document.querySelector(".logotext");
+        const about = document.querySelector(".about");
+        const body = document.querySelectorAll(".body");
+        const terminalInput = document.getElementById('terminalInput');
+
+        // Toggle Dark Mode
+        dark.addEventListener("click", () => {
+            document.body.classList.toggle("light");
+            main.classList.toggle("light");
+            header.classList.toggle("light");
+            logotext.classList.toggle("light");
+        });
+
+        // Show/Hide About Section
+        aboutBtn.forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+                event.preventDefault(); // Prevent link default behavior
+                about.classList.toggle("fade-in");
+                about.style.display = about.style.display === "none" || about.style.display === "" ? "block" : "none";
+                body[0].style.display = body[0].style.display === "none" ? "flex" : "none";
+            });
+        });
+
+        // Hide About Section when Remove button is clicked
+        remBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent link default behavior
+            about.style.display = "none";
+            body[0].style.display = "flex";
+        });
+
+        // Terminal Input Handler
+        terminalInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const command = terminalInput.value.toLowerCase();
+                terminalInput.value = ''; // Clear input after Enter is pressed
+                handleCommand(command);
+            }
+        });
+
+        function handleCommand(command) {
+            switch(command) {
+                case 'whoami':
+                    about.style.display = 'block';
+                    about.classList.add("fade-in");
+                    body[0].style.display = 'none';
+                    break;
+                case 'ls':
+                    alert('Displaying available sections... (In actual implementation, it would list available commands)');
+                    break;
+                case 'skills':
+                    alert('Skills: Penetration Testing, CTFs, Ethical Hacking, etc.');
+                    break;
+                case 'achievement':
+                    window.location.href = '/hof.html'; // Redirect to achievements page
+                    break;
+                default:
+                    alert('Command not found!');
+            }
+        }
+    </script>
 </body>
 </html>
