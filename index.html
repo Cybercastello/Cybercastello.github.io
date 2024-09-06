@@ -20,7 +20,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
             margin: 0;
             overflow: hidden;
@@ -48,6 +48,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            height: 100vh; /* Full height for first section */
+            z-index: 1; /* Ensure container is above background */
         }
 
         .name h1 {
@@ -73,7 +75,7 @@
         }
 
         .social {
-            margin-top: 50px;
+            margin-top: 20px;
             display: flex;
             gap: 15px;
         }
@@ -83,95 +85,40 @@
             height: 32px;
         }
 
-        .terminal {
-            background: #000;
-            color: #0f0;
-            font-family: "VT323", monospace;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 800px;
-            height: 60%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .terminal-header {
-            background: #333;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            top: 0;
-            left: 0;
-        }
-
-        .terminal-header span {
-            display: block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #f00;
-        }
-
-        .terminal-header span.yellow {
-            background: #ff0;
-        }
-
-        .terminal-header span.green {
-            background: #0f0;
-        }
-
-        .terminal-body {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            margin-top: 20px; /* Adjusted for label positioning */
-        }
-
-        .terminal-input {
-            background: #111;
-            padding: 10px;
-            border-top: 1px solid #333;
-            display: flex;
-            align-items: center;
-        }
-
-        .terminal-input label {
-            margin-right: 5px;
-        }
-
-        .terminal-input input {
-            background: #111;
-            color: #0f0;
-            border: none;
+        .second-section {
             width: 100%;
-            outline: none;
+            height: 100vh; /* Full height for scrollable view */
+            display: none; /* Hide second section initially */
+            overflow-y: auto; /* Enable vertical scrolling */
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            z-index: 1; /* Ensure container is above background */
         }
 
-        .typing {
-            border-right: 2px solid #0f0;
-            animation: typing 1s steps(30, end) infinite;
+        .content-section {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
         }
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+        .content-section h2 {
+            margin-bottom: 10px;
+        }
+
+        .content-section p {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Initial Screen with Name and Button -->
-    <div class="container">
+    <!-- First Section with Name and Button -->
+    <div class="container" id="firstSection">
         <div class="name">
             <h1>It's Me Castello xD</h1>
         </div>
-        <button class="button" id="terminalButton">Whoami</button>
+        <button class="button" id="whoamiButton">Whoami</button>
     </div>
 
     <!-- Social Media Links at the Bottom -->
@@ -193,106 +140,50 @@
         </a>
     </div>
 
+    <!-- Second Section with Scrollable Content -->
+    <div class="second-section" id="secondSection">
+        <div class="content-section" id="whoami">
+            <h2>Whoami</h2>
+            <p>Amal aka c4s73Llo, Cyber Security Enthusiast...</p>
+        </div>
+
+        <div class="content-section" id="achievements">
+            <h2>Achievements</h2>
+            <p>Found multiple vulnerabilities in real-world web applications, secured big companies like Apple, NASA, Nokia, etc.</p>
+        </div>
+
+        <div class="content-section" id="skills">
+            <h2>Skills</h2>
+            <p>Penetration Testing, Web Application Security, Bug Bounty Hunting, CTF Participation...</p>
+        </div>
+
+        <div class="content-section" id="education">
+            <h2>Education</h2>
+            <p>BSc in Cyber Forensics...</p>
+        </div>
+
+        <div class="content-section" id="projects">
+            <h2>Projects</h2>
+            <p>Details about various cybersecurity projects...</p>
+        </div>
+
+        <div class="content-section" id="contact">
+            <h2>Contact</h2>
+            <p>Email: [Your Email]</p>
+            <p>Phone: [Your Phone]</p>
+        </div>
+    </div>
+
     <script>
-        const terminalButton = document.getElementById("terminalButton");
+        const whoamiButton = document.getElementById("whoamiButton");
+        const firstSection = document.getElementById("firstSection");
+        const secondSection = document.getElementById("secondSection");
 
-        // Show Terminal on Button Click
-        terminalButton.addEventListener("click", () => {
-            terminalButton.style.display = "none"; // Hide button
-            renderSecondTerminal(); // Render the second terminal
+        // Function to Show Second Section and Hide First Section on Button Click
+        whoamiButton.addEventListener("click", () => {
+            firstSection.style.display = "none"; // Hide the first section
+            secondSection.style.display = "block"; // Show the second section
         });
-
-        // Function to Render the Second Terminal
-        function renderSecondTerminal() {
-            const body = document.body;
-
-            const terminalHtml = `
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <span class="red"></span>
-                        <span class="yellow"></span>
-                        <span class="green"></span>
-                    </div>
-                    <div class="terminal-body" id="terminal-body">
-                        <pre id="terminal-output">Welcome to the Interactive Terminal! Type 'help' to see available commands.</pre>
-                    </div>
-                    <div class="terminal-input">
-                        <label for="terminal-input">user@localhost:~$</label>
-                        <input type="text" id="terminal-input" class="typing" autofocus autocomplete="off">
-                    </div>
-                </div>
-            `;
-            body.innerHTML += terminalHtml; // Append terminal HTML
-
-            // Initialize terminal functionality
-            initializeTerminal();
-        }
-
-        // Initialize Terminal Logic
-        function initializeTerminal() {
-            const terminalInput = document.getElementById('terminal-input');
-            const terminalOutput = document.getElementById('terminal-output');
-            const terminalBody = document.getElementById('terminal-body');
-
-            const commands = {
-                help: function() {
-                    return `Available commands:
-  - help: Show available commands
-  - cd: Change directory (simulated)
-  - pwd: Print current directory
-  - whoami: Show user information
-  - achievements: Show achievements`;
-                },
-                cd: function(args) {
-                    if (args.length === 0) return "Specify a directory to change to.";
-                    return `Changed directory to ${args[0]} (simulated).`;
-                },
-                pwd: function() {
-                    return "/home/castello (simulated)";
-                },
-                whoami: function() {
-                    return "Amal aka c4s73Llo, Cyber Security Enthusiast,Driven by a passion for cybersecurity,I'm actively honing my skills through a blend of academic training,self learning etc.Currently pursuing BSc in Cyber Forensics, I balance my studies with part-time bug hunting, relishing the thrill of uncovering vulnerabilities and contributing to a safer digital landscape.My areas of interest include penetration testing, particularly the intrigue of exploring and exploiting system weaknesses. I'm always eager to learn new techniques and expand my knowledge, actively participating in CTFs to sharpen my problem-solving abilities and collaborate with fellow security enthusiasts.";
-                },
-                achievements: function() {
-                    return "Achievements: \n- Found multiple vulnerabilities in real-world web applications.Secured Big Companies like Apple,NASA,Nokia etc.";
-                }
-            };
-
-            terminalInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    const input = terminalInput.value.trim();
-                    if (input) {
-                        handleCommand(input);
-                        terminalInput.value = ''; // Clear input
-                    }
-                    event.preventDefault();
-                }
-            });
-
-            function handleCommand(input) {
-                const [command, ...args] = input.split(' ');
-                addCommandToTerminal(input);
-                if (commands[command]) {
-                    const response = commands[command](args);
-                    addResponseToTerminal(response);
-                } else {
-                    addResponseToTerminal(`Command not found: ${command}`);
-                }
-            }
-
-            function addCommandToTerminal(command) {
-                const outputLine = document.createElement('pre');
-                outputLine.textContent = `user@localhost:~$ ${command}`;
-                terminalOutput.appendChild(outputLine);
-            }
-
-            function addResponseToTerminal(response) {
-                const responseLine = document.createElement('pre');
-                responseLine.textContent = response;
-                terminalOutput.appendChild(responseLine);
-                terminalBody.scrollTop = terminalBody.scrollHeight; // Auto-scroll to bottom
-            }
-        }
     </script>
 </body>
 </html>
